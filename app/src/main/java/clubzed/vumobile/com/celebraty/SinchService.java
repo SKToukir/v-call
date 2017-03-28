@@ -29,6 +29,7 @@ public class SinchService extends Service {
 
     public static final String CALL_ID = "CALL_ID";
     static final String TAG = SinchService.class.getSimpleName();
+    public static String uName = "";
 
     private SinchServiceInterface mSinchServiceInterface = new SinchServiceInterface();
     private SinchClient mSinchClient;
@@ -39,6 +40,13 @@ public class SinchService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
+        start(uName);
+        return START_STICKY;
     }
 
     @Override

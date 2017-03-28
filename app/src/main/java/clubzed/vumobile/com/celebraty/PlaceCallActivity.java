@@ -10,9 +10,11 @@ import android.widget.Toast;
 
 import com.sinch.android.rtc.calling.Call;
 
+import clubzed.vumobile.com.celebraty.videocall.OnlineUserListActivity;
+
 public class PlaceCallActivity extends BaseActivity {
 
-    private Button mCallButton;
+    private Button mCallButton,btnShowOnlineUser;
     private EditText mCallName;
 
     @Override
@@ -22,6 +24,8 @@ public class PlaceCallActivity extends BaseActivity {
 
         mCallName = (EditText) findViewById(R.id.callName);
         mCallButton = (Button) findViewById(R.id.callButton);
+        btnShowOnlineUser = (Button) findViewById(R.id.btnShowOnlineUser);
+        btnShowOnlineUser.setOnClickListener(buttonClickListener);
         mCallButton.setEnabled(false);
         mCallButton.setOnClickListener(buttonClickListener);
 
@@ -36,13 +40,13 @@ public class PlaceCallActivity extends BaseActivity {
         mCallButton.setEnabled(true);
     }
 
-    @Override
-    public void onDestroy() {
-        if (getSinchServiceInterface() != null) {
-            getSinchServiceInterface().stopClient();
-        }
-        super.onDestroy();
-    }
+//    @Override
+//    public void onDestroy() {
+//        if (getSinchServiceInterface() != null) {
+//            getSinchServiceInterface().stopClient();
+//        }
+//        super.onDestroy();
+//    }
 
     private void stopButtonClicked() {
         if (getSinchServiceInterface() != null) {
@@ -73,9 +77,11 @@ public class PlaceCallActivity extends BaseActivity {
                 case R.id.callButton:
                     callButtonClicked();
                     break;
-
                 case R.id.stopButton:
                     stopButtonClicked();
+                    break;
+                case R.id.btnShowOnlineUser:
+                    startActivity(new Intent(PlaceCallActivity.this, OnlineUserListActivity.class));
                     break;
 
             }
